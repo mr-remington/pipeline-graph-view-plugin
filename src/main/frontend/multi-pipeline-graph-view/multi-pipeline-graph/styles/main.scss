@@ -26,33 +26,23 @@
 .PWGx-PipelineGraph-summary-container {
   --progress-bg: #{$progress-bg};
   text-align: left;
-  // position: absolute;
   white-space: nowrap;
 
-  // .cell-box {
-  //   position: relative;
-  // }
-  
   .jobName {
-    // position: absolute;
-    // display: block;
     position: relative;
-    // width: 100%;
-    // top: 0.68em;
-    // left: 0.5em;
     z-index: 1
   }
 
   .badge {
-    position: relative; /* Ensure the pseudo-element is positioned relative to the badge */
+    position: relative;
     display: inline-block;
     border-radius: 40px;
     font-size: 11px;
     font-weight: 700;
     min-width: 10px;
     padding: 3px 7px;
-    background-color: white; /* Original background color */
-    overflow: hidden; /* Ensure the pseudo-element stays within the badge */
+    background-color: white;
+    overflow: hidden;
   }
   
   .badge::before {
@@ -63,63 +53,36 @@
     width: 100%;
     height: 100%;
     border-radius: 40px;
-    border: 2px solid transparent; /* Initial transparent border to maintain structure */
-    box-sizing: border-box; /* Ensure border is included in the element's dimensions */
-    z-index: 1; /* Ensure the border is on top */
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    z-index: 1;
   }
   
   .badge.success::before {
-    border-color: var(--green); /* Set border color for success status */
+    border-color: var(--green);
   }
   
   .badge.failure::before {
-    border-color: var(--red); /* Set border color for failure status */
+    border-color: var(--red);
   }
   
   .badge.unstable::before {
-    border-color: var(--text-color-secondary); /* Set border color for unstable status */
+    border-color: var(--text-color-secondary);
   }
   
   .badge.aborted::before {
-    border-color: var(--text-color-secondary); /* Set border color for aborted status */
+    border-color: var(--text-color-secondary);
   }
   
   .badge.not-built::before {
-    border-color: var(--text-color-secondary); /* Set border color for not built status */
+    border-color: var(--text-color-secondary);
   }
 
   .badge a {
-    position: relative; /* Ensure the link is positioned above the pseudo-element */
-    z-index: 2; /* Higher z-index to ensure the link is clickable */
-    color: var(--black); /* Set the link color */
-    text-decoration: none; /* Optional: remove underline */
+    position: relative;
+    z-index: 2;
+    color: var(--black);
   }
-
-  // .badge {
-  //   // background-color: #89aed1;
-  //   border-radius: 40px;
-  //   font-size: 11px;
-  //   font-weight: 700;
-  //   min-width: 10px;
-  //   padding: 3px 7px;
-  //   // background-color: var(--white); /* Make background transparent */
-  //   border: 2px solid transparent;
-  // }
-
-  // .badge.success {
-  //   border-color: var(--success-color);
-  // }
-
-  // .badge.failure {
-  //   border-color: var(--red);
-  // }
-
-  // .badge.aborted {
-  //   border-color: var(--text-color-secondary);
-  // }
-  // .badge a {
-  //   color: var(--link-dark-color--hover);
-  // }
 
   .durations {
     background: var(--light-grey);
