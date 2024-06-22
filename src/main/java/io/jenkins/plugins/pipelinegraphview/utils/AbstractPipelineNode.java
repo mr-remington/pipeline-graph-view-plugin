@@ -46,7 +46,7 @@ public class AbstractPipelineNode {
                 : "Started " + Util.getTimeSpanString(Math.abs(startTimeMillis - new Date().getTime())) + " ago";
     }
 
-    protected static String getUserFriendlyDuration(long totalDurationMillis) {
+    public static String getUserFriendlyDuration(long totalDurationMillis) {
         return "Took " + Util.getTimeSpanString(totalDurationMillis);
     }
 

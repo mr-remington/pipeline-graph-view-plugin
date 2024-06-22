@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { RunInfo } from "./MultiPipelineGraphModel";
+import formatEpochToLocalTime from "./support/formatEpochToLocalTime";
 import {
   PipelineGraph,
   StageInfo,
@@ -22,7 +23,7 @@ export const SingleRun: (data: Props) => JSX.Element = ({ run }) => {
   if (onJobView) {
     singleRunPage = `${run.id}/pipeline-graph/`;
   }
-
+  console.log(run)
   const handleNodeClick = (nodeName: string, id: number) => {
     console.log(nodeName, id);
     let redirect = `../${run.id}/pipeline-console?selected-node=${id}`;
@@ -31,15 +32,26 @@ export const SingleRun: (data: Props) => JSX.Element = ({ run }) => {
     }
     window.location.href = redirect;
   };
+
+  const formattedStartTime = formatEpochToLocalTime(run.startTime);
+
   return (
     <tr>
-      <td>
-        <a
-          href={singleRunPage}
-          className="jenkins-table__link pgw-user-specified-text"
-        >
-          {run.displayName}
-        </a>
+      <td className="PWGx-PipelineGraph-summary-container">
+        <div className="cell-box">
+          <div className="jobName">
+            <span className={`badge ${run.result.toLowerCase()}`}>
+              <a href={singleRunPage} className="build-link">
+                {run.displayName}
+              </a>
+            </span>
+          </div>
+          <div className="durations">
+            <div className="start-time">{formattedStartTime}</div>
+            <div className="took">{run.duration}</div>
+          </div>
+        </div>
+        
       </td>
       <td>
         <PipelineGraph

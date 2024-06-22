@@ -1,6 +1,11 @@
 @import "variables";
 @import "../../../pipeline-graph-view/pipeline-graph/styles/PipelineGraphWidget";
-@import "MultiPipelineGraph";
+
+.PWGx-PipelineHeader {
+  width: 4rem;
+  color: red;
+  text-align: right;
+}
 
 .PWGx-PipelineGraph-container {
   display: flex;
@@ -15,5 +20,122 @@
 
   .PWGx-PipelineGraph {
     margin-right: auto;
+  }
+}
+
+.PWGx-PipelineGraph-summary-container {
+  --progress-bg: #{$progress-bg};
+  text-align: left;
+  // position: absolute;
+  white-space: nowrap;
+
+  // .cell-box {
+  //   position: relative;
+  // }
+  
+  .jobName {
+    // position: absolute;
+    // display: block;
+    position: relative;
+    // width: 100%;
+    // top: 0.68em;
+    // left: 0.5em;
+    z-index: 1
+  }
+
+  .badge {
+    position: relative; /* Ensure the pseudo-element is positioned relative to the badge */
+    display: inline-block;
+    border-radius: 40px;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 10px;
+    padding: 3px 7px;
+    background-color: white; /* Original background color */
+    overflow: hidden; /* Ensure the pseudo-element stays within the badge */
+  }
+  
+  .badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    border: 2px solid transparent; /* Initial transparent border to maintain structure */
+    box-sizing: border-box; /* Ensure border is included in the element's dimensions */
+    z-index: 1; /* Ensure the border is on top */
+  }
+  
+  .badge.success::before {
+    border-color: var(--green); /* Set border color for success status */
+  }
+  
+  .badge.failure::before {
+    border-color: var(--red); /* Set border color for failure status */
+  }
+  
+  .badge.unstable::before {
+    border-color: var(--text-color-secondary); /* Set border color for unstable status */
+  }
+  
+  .badge.aborted::before {
+    border-color: var(--text-color-secondary); /* Set border color for aborted status */
+  }
+  
+  .badge.not-built::before {
+    border-color: var(--text-color-secondary); /* Set border color for not built status */
+  }
+
+  .badge a {
+    position: relative; /* Ensure the link is positioned above the pseudo-element */
+    z-index: 2; /* Higher z-index to ensure the link is clickable */
+    color: var(--black); /* Set the link color */
+    text-decoration: none; /* Optional: remove underline */
+  }
+
+  // .badge {
+  //   // background-color: #89aed1;
+  //   border-radius: 40px;
+  //   font-size: 11px;
+  //   font-weight: 700;
+  //   min-width: 10px;
+  //   padding: 3px 7px;
+  //   // background-color: var(--white); /* Make background transparent */
+  //   border: 2px solid transparent;
+  // }
+
+  // .badge.success {
+  //   border-color: var(--success-color);
+  // }
+
+  // .badge.failure {
+  //   border-color: var(--red);
+  // }
+
+  // .badge.aborted {
+  //   border-color: var(--text-color-secondary);
+  // }
+  // .badge a {
+  //   color: var(--link-dark-color--hover);
+  // }
+
+  .durations {
+    background: var(--light-grey);
+    border-radius: 15px;
+    font-size: 11px;
+    padding: 7px;
+    position: relative;
+    text-align: left;
+    top: -1em;
+    left: 1em;
+
+    .start-time {
+      padding: 3px 5px;
+    }
+    .took {
+      padding: 3px 5px;
+    }
   }
 }
