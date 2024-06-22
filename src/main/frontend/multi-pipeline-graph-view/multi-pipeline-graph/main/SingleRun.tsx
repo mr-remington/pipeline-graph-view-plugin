@@ -24,7 +24,7 @@ export const SingleRun: (data: Props) => JSX.Element = ({ run }) => {
   if (onJobView) {
     singleRunPage = `${run.id}/pipeline-graph/`;
   }
-  console.log(run)
+
   const handleNodeClick = (nodeName: string, id: number) => {
     console.log(nodeName, id);
     let redirect = `../${run.id}/pipeline-console?selected-node=${id}`;
