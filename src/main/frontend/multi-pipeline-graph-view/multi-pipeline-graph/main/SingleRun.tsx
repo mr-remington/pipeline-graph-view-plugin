@@ -9,6 +9,7 @@ import {
 interface Props {
   run: RunInfo;
 }
+const imagesPath = document.head.dataset.imagesurl;
 
 export const SingleRun: (data: Props) => JSX.Element = ({ run }) => {
   const [stages, setStages] = useState<Array<StageInfo>>([]);
@@ -34,24 +35,29 @@ export const SingleRun: (data: Props) => JSX.Element = ({ run }) => {
   };
 
   const formattedStartTime = formatEpochToLocalTime(run.startTime);
+  const iconOuterClassName = run.result === "IN_PROGRESS" ? "in-progress" : "static";
+  const statusClass = `${run.result.toLowerCase()}`;
+  const iconWrapperClassName = `build-status-icon__wrapper icon-md ${iconOuterClassName === "in-progress" ? "icon-grey-anime" : ""}`;
 
   return (
     <tr>
       <td className="PWGx-PipelineGraph-summary-container">
-        <div className="cell-box">
-          <div className="jobName">
-            <span className={`badge ${run.result.toLowerCase()}`}>
-              <a href={singleRunPage} className="build-link">
-                {run.displayName}
-              </a>
-            </span>
-          </div>
-          <div className="durations">
-            <div className="start-time">{formattedStartTime}</div>
-            <div className="took">{run.duration}</div>
-          </div>
+        <div className="jobName">
+          <a href={singleRunPage} className="build-status-link">
+            <g className={iconWrapperClassName}>
+              <g className="build-status-icon__outer">
+                <svg focusable="false" className={`svg-icon ${statusClass}`}>
+                  <use href={`${imagesPath}/build-status/build-status-sprite.svg#build-status-${iconOuterClassName}`}></use>
+                </svg>
+              </g>
+              <span className="build-number">{run.displayName}</span>
+            </g>
+          </a>
         </div>
-        
+        <div className="durations">
+          <div className="start-time">{formattedStartTime}</div>
+          <div className="took">{run.duration}</div>
+        </div>
       </td>
       <td>
         <PipelineGraph
