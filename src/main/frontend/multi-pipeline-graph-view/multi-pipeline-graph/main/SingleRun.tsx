@@ -36,27 +36,16 @@ export const SingleRun: (data: Props) => JSX.Element = ({ run }) => {
 
   const formattedStartTime = formatEpochToLocalTime(run.startTime);
   const iconOuterClassName = run.result === "IN_PROGRESS" ? "in-progress" : "static";
-  const statusClass = `${run.result.toLowerCase()}`;
-  const iconWrapperClassName = `build-status-icon__wrapper icon-md ${iconOuterClassName === "in-progress" ? "icon-grey-anime" : ""}`;
+  const statusColor = `${run.result.toLowerCase()}`;
 
   return (
     <tr>
       <td className="PWGx-PipelineGraph-summary-container">
-        <div className="jobName">
-          <a href={singleRunPage} className="build-status-link">
-            <g className={iconWrapperClassName}>
-              <g className="build-status-icon__outer">
-                <svg focusable="false" className={`svg-icon ${statusClass}`}>
-                  <use href={`${imagesPath}/build-status/build-status-sprite.svg#build-status-${iconOuterClassName}`}></use>
-                </svg>
-              </g>
-              <span className="build-number">{run.displayName}</span>
-            </g>
-          </a>
-        </div>
+        <a href={singleRunPage} className={`PWGx-PipelineHeader-overview-pane ${statusColor}`}>
+          <p className="PWGx-PipelineHeader-overview-link">{run.displayName}</p>
+        </a>
         <div className="durations">
           <div className="start-time">{formattedStartTime}</div>
-          <div className="took">{run.duration}</div>
         </div>
       </td>
       <td>
@@ -67,6 +56,9 @@ export const SingleRun: (data: Props) => JSX.Element = ({ run }) => {
           path={path}
           collapsed={true}
         />
+      </td>
+      <td className="PWGx-PipelineGraph-summary-container">
+        <div className="took">{run.result === "IN_PROGRESS" ? "Running..." : run.duration}</div>
       </td>
     </tr>
   );

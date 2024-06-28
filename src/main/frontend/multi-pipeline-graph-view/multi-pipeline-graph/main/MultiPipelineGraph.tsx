@@ -21,6 +21,7 @@ export const MultiPipelineGraph = () => {
         <tr>
           <th className="PWGx-PipelineHeader">ID</th>
           <th data-sort-disable="true">Pipeline</th>
+          <th>Duration</th>
         </tr>
       </thead>
       <tbody>

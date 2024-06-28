@@ -1,32 +1,32 @@
 @import "variables";
 @import "../../../pipeline-graph-view/pipeline-graph/styles/PipelineGraphWidget";
 
-.build-status-icon__outer {
-  .svg-icon.success {
-    color: var(--green);
+
+.PWGx-PipelineHeader-overview-pane {
+  border-style: solid;
+  border-radius: 24px;
+  border-width: 2px;
+  display: inline-flex;
+  align-items: center; /* Vertically aligns the content */
+  z-index: 3;
+  position: relative;
+  background-color: white;
+
+  &.aborted {
+    border-color: var(--text-color-secondary)
   }
-  .svg-icon.failure {
-    color: var(--red);
+  &.success {
+    border-color: var(--success-color);
   }
-  .svg-icon.unstable,
-  .svg-icon.aborted,
-  .svg-icon.not-built {
-    color: var(--text-color-secondary);
+  &.failure {
+    border-color: var(--red);
   }
 }
 
-.build-status-icon__wrapper {
-  display: inline-block;
-  background: var(--white);
-}
 
-.build-number {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 8px;
-  color: var(--black);
+.PWGx-PipelineHeader-overview-link {
+  font-size: var(--font-size-xs);
+  margin: 4px 6px 4px 6px;
 }
 
 .PWGx-PipelineHeader {
@@ -55,11 +55,10 @@
   text-align: left;
   white-space: nowrap;
 
-  .jobName {
-    position: relative;
-    z-index: 1
+  .took {
+    padding: 3px 5px;
+    font-size: var(--font-size-xs);
   }
-
   .durations {
     background: var(--light-grey);
     border-radius: 15px;
@@ -67,13 +66,11 @@
     padding: 7px;
     position: relative;
     text-align: left;
-    top: -1.8em;
+    top: -0.8em;
 
     .start-time {
       padding: 3px 5px;
     }
-    .took {
-      padding: 3px 5px;
-    }
+
   }
 }
