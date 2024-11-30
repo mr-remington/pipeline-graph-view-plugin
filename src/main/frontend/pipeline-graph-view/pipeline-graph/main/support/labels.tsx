@@ -2,18 +2,29 @@ import * as React from "react";
 
 import { nodeStrokeWidth } from "../support/StatusIcons";
 import { TruncatingLabel } from "../support/TruncatingLabel";
-import { NodeLabelInfo, LayoutInfo, StageInfo } from "../PipelineGraphModel";
+import { NodeColumn, NodeLabelInfo, LayoutInfo, StageInfo } from "../PipelineGraphModel";
 import { sequentialStagesLabelOffset } from "../PipelineGraphLayout";
 
 import { TooltipLabel } from "./convertLabelToTooltip";
+
+import { styled } from '@mui/material/styles';
+import {
+  Typography,
+} from '@mui/material';
 
 interface RenderBigLabelProps {
   details: NodeLabelInfo;
   layout: LayoutInfo;
   measuredHeight: number;
   selectedStage?: StageInfo;
-  isStageSelected: (stage?: StageInfo) => boolean;
+  isStageSelected?: (stage?: StageInfo) => boolean;
 }
+
+const SecondaryText = styled(Typography)(({ theme }) => ({
+  color: 'var(--text-color-secondary)',
+  fontSize: 'var(--font-size-xs)',
+  whiteSpace: 'nowrap',
+}));
 
 /**
  * Generate the Component for a big label
@@ -98,6 +109,7 @@ export function BigLabel({
 interface SmallLabelProps {
   details: NodeLabelInfo;
   layout: LayoutInfo;
+  nodeColumns?: Array<NodeColumn>;
   isStageSelected: (stage?: StageInfo) => boolean;
 }
 
@@ -155,9 +167,48 @@ export function SmallLabel({
   );
 }
 
-interface SequentialContainerLabelProps {
-  details: NodeLabelInfo;
-  layout: LayoutInfo;
+/**
+ * Generate the Component for the duration label
+ */
+export function DurationLabel({
+  details,
+  layout,
+  measuredHeight
+}: RenderBigLabelProps) {
+  const { nodeSpacingH, labelOffsetV, connectorStrokeWidth, ypStart } = layout;
+
+  const labelWidth = nodeSpacingH - connectorStrokeWidth * 2;
+  const labelHeight = ypStart - labelOffsetV;
+  const labelOffsetH = Math.floor(labelWidth / -2);
+
+  // These are about layout more than appearance, so they should probably remain inline
+  const durationLabelStyle: React.CSSProperties = {
+    position: "absolute",
+    width: labelWidth,
+    maxHeight: `${labelHeight}px`,
+    textAlign: "center",
+    marginLeft: labelOffsetH,
+  };
+
+  const duration = details.stage?.totalDurationMillis?.replace(/^Took\s/, '')
+
+  const x = details.x;
+  const bottom = measuredHeight - (details.y * 2)
+
+  const style: React.CSSProperties = {
+    ...durationLabelStyle,
+    bottom: `${bottom}px`,
+    left: `${x}px`,
+  };
+  
+  return (
+    <SecondaryText
+      style={style}
+      key={details.key}
+    >
+      {duration}
+    </SecondaryText>
+  );
 }
 
 /**

@@ -113,7 +113,7 @@ export class PipelineSummary extends React.Component<PipelineSummaryProps> {
           </StyledBox>
           <CardContent
             sx={{
-              paddingLeft: '28px',
+              paddingLeft: '22px',
               paddingTop: '0px',
               paddingBottom: '0px',
               paddingRight: '0px',

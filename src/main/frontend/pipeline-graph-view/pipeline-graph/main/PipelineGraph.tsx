@@ -16,6 +16,7 @@ import { Node, SelectionHighlight } from "./support/nodes";
 import {
   BigLabel,
   SmallLabel,
+  DurationLabel,
   SequentialContainerLabel,
 } from "./support/labels";
 import { GraphConnections } from "./support/connections";
@@ -38,6 +39,7 @@ interface State {
   branchLabels: Array<NodeLabelInfo>;
   measuredWidth: number;
   measuredHeight: number;
+  stages: Array<StageInfo>;
   layout: LayoutInfo;
   selectedStage?: StageInfo;
 }
@@ -56,6 +58,7 @@ export class PipelineGraph extends React.Component {
       branchLabels: [],
       measuredWidth: 0,
       measuredHeight: 0,
+      stages: [],
       layout: { ...defaultLayout, ...props.layout },
       selectedStage: props.selectedStage,
     };
@@ -166,9 +169,9 @@ export class PipelineGraph extends React.Component {
       branchLabels,
       measuredWidth,
       measuredHeight,
+      stages,
     } = this.state;
-    console.log(this.state)
-    
+
     // Without these we get fire, so they're hardcoded
     const outerDivStyle = {
       position: "relative", // So we can put the labels where we need them
@@ -210,14 +213,22 @@ export class PipelineGraph extends React.Component {
           </svg>
 
           {bigLabels.map((label) => (
-            <BigLabel
-              key={label.key}
-              details={label}
-              layout={this.state.layout}
-              measuredHeight={measuredHeight}
-              selectedStage={this.state.selectedStage}
-              isStageSelected={this.stageIsSelected}
-            />
+            <React.Fragment>
+              <BigLabel
+                key={label.key}
+                details={label}
+                layout={this.state.layout}
+                measuredHeight={measuredHeight}
+                selectedStage={this.state.selectedStage}
+                isStageSelected={this.stageIsSelected}
+              />
+              <DurationLabel
+                key={label.key}
+                details={label}
+                layout={this.state.layout}
+                measuredHeight={measuredHeight}
+              />
+            </React.Fragment>
           ))}
           {smallLabels.map((label) => (
             <SmallLabel
