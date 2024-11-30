@@ -55,7 +55,7 @@ export const getClassForResult = (result: Result) => {
   // These come from the themes icons.less
   switch (result) {
     case Result.aborted:
-      return "icon-aborted";
+      return "icon-skipped";
     case Result.unstable:
       return "icon-yellow";
     case Result.failure:

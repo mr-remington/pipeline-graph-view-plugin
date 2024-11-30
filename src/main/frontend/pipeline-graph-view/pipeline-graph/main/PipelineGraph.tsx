@@ -167,7 +167,8 @@ export class PipelineGraph extends React.Component {
       measuredWidth,
       measuredHeight,
     } = this.state;
-
+    console.log(this.state)
+    
     // Without these we get fire, so they're hardcoded
     const outerDivStyle = {
       position: "relative", // So we can put the labels where we need them

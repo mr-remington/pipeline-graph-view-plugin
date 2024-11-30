@@ -5,3 +5,8 @@
 .pgw-user-specified-text {
   overflow-wrap: break-word;
 }
+
+.jenkins-table > tbody > tr > td.pgw-table-summary-col-1 {
+  padding: var(--table-padding) 0 var(--table-padding) 0.8rem;
+  vertical-align: top;
+}
